@@ -24,4 +24,3 @@ export const getUser = async (email: string) => {
 
     return response;
 };
-

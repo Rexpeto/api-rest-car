@@ -1,18 +1,18 @@
 import { Router } from "express";
-import { readdirSync } from 'fs';
+import { readdirSync } from "fs";
 
 const PATH_ROUTE = `${__dirname}`;
 
 export const router = Router();
 
 /*
- * Clean name of file 
+ * Clean name of file
  * Example: user.route.ts -> user
  * @param fileName
  * @returns
  * */
-const cleanFileName = (fileName: string) => {
-    return fileName.split('.').shift();
+const cleanFileName = (fileName: string): any => {
+    fileName.split(".").shift();
 };
 
 /*
@@ -21,12 +21,14 @@ const cleanFileName = (fileName: string) => {
  * @returns
  **/
 readdirSync(PATH_ROUTE).filter(fileName => {
-    const file = cleanFileName(fileName);
+    const file: string = cleanFileName(fileName);
 
-    if (file !== 'index') {
-        import(`./${fileName}`).then((moduleRouter) => {
-            router.use(`/${file}`, moduleRouter.router);
-        });
+    if (file !== "index") {
+        import(`./${fileName}`)
+            .then(moduleRouter => {
+                router.use(`/${file}`, moduleRouter.router);
+            })
+            .catch(error => console.log("Oops! Ocurrio un error"));
 
         console.log(`Ruta cargada -> ${file}`);
     }

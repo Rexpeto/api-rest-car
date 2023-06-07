@@ -7,10 +7,10 @@ export const router = Router();
  * Route https://[IpV4]:[PORT]/user
  * Method Get
  * */
-router.get('/', getUserCtrl);
+router.get("/", getUserCtrl);
 
 /*
  * Route https://[IpV4]:[PORT]/user/register
  * Method Post
  * */
-router.post('/register', insertUserCtrl);
+router.post("/register", insertUserCtrl);
