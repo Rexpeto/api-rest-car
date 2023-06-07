@@ -11,9 +11,7 @@ export const router = Router();
  * @param fileName
  * @returns
  * */
-const cleanFileName = (fileName: string): any => {
-    fileName.split(".").shift();
-};
+const cleanFileName = (fileName: string) => fileName.split(".").shift();
 
 /*
  * Check file in folder router and use router export
@@ -21,14 +19,12 @@ const cleanFileName = (fileName: string): any => {
  * @returns
  **/
 readdirSync(PATH_ROUTE).filter(fileName => {
-    const file: string = cleanFileName(fileName);
+    const file = cleanFileName(fileName);
 
     if (file !== "index") {
-        import(`./${fileName}`)
-            .then(moduleRouter => {
-                router.use(`/${file}`, moduleRouter.router);
-            })
-            .catch(error => console.log("Oops! Ocurrio un error"));
+        import(`./${fileName}`).then(moduleRouter => {
+            router.use(`/${file}`, moduleRouter.router);
+        });
 
         console.log(`Ruta cargada -> ${file}`);
     }
