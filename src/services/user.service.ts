@@ -1,5 +1,5 @@
 import UserModel from "../models/user.schema";
-import { UserInterface } from "../types/user.type";
+import UserInterface from "../types/user.type";
 
 /**
  * Register user
@@ -19,8 +19,6 @@ export const registerUser = async (user: UserInterface) => {
  * @returns
  * */
 
-export const getUser = async (email: string) => {
-    const response = await UserModel.findOne({ email });
-
-    return response;
+export const getUser = async () => {
+    return { data: "Hola mundo ->" };
 };
