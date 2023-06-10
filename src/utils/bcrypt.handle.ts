@@ -1,4 +1,4 @@
-import { hash } from "bcrypt";
+import { compare, hash } from "bcrypt";
 
 /*
  * Hash password of user
@@ -16,4 +16,7 @@ export const encrypt = async (password: string) => {
  * @param password
  * @returns
  * */
-export const verified = async (password: string) => {};
+export const verified = async (password: string, passwordHash: string) => {
+    const isCorrect = await compare(password, passwordHash);
+    return isCorrect;
+};
