@@ -1,13 +1,13 @@
 import { Router } from "express";
-import { getUserCtrl, insertUserCtrl } from "../controllers/user.ctrl";
+import { loginCtrl, insertUserCtrl } from "../controllers/user.ctrl";
 
 export const router = Router();
 
 /*
- * Route https://[IpV4]:[PORT]/user
+ * Route https://[IpV4]:[PORT]/user/login
  * Method Get
  * */
-router.get("/", getUserCtrl);
+router.post("/login", loginCtrl);
 
 /*
  * Route https://[IpV4]:[PORT]/user/register
