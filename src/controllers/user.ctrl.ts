@@ -1,19 +1,25 @@
 import { type Request, type Response } from "express";
-import { getUser, registerUser } from "../services/user.service";
+import { loginUser, registerUser } from "../services/user.service";
 import handleHttp from "../utils/error.handle";
 
-export const getUserCtrl = async (
-    req: Request,
-    res: Response
-): Promise<void> => {
-    const response = getUser();
-    res.json({ msg: "Test from get ->" });
-};
+export const loginCtrl = async ({ body }: Request, res: Response): Promise<void> => {
+    const { email, password } = body
+    try {
+        if(!email) {
+            return <any> res.status(403).json({msg: "Debes colocar su email"});
+        }
 
-export const getUsers = async (
-    req: Request,
-    res: Response
-): Promise<void> => {};
+        if(!password) {
+            return <any> res.status(403).json({msg: "Debes colocar su contraseña"});
+        }
+
+        const user = await loginUser({email, password});
+
+        res.status(200).json(user);
+    } catch (e) {
+        handleHttp(res, 'Oops! Ocurrio un error', e);
+    }
+};
 
 export const insertUserCtrl = async (
     { body }: Request,
