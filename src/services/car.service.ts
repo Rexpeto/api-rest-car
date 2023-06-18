@@ -23,15 +23,13 @@ export const searchCarMake = async (make: string) => {
     try {
         const makeCar = await CarModel.find({ make });
 
-        console.log(process.env.RAPIDAPI_KEY);
-
         if (!makeCar.length) {
             const { data } = await clientAxios(`?make=${make}&limit=30`);
 
             if (!data.length) return { msg: "Marca no encontrada" };
 
             const newCars = await CarModel.create(data);
-            console.log(newCars);
+            console.log(make, newCars);
             return newCars;
         }
 
