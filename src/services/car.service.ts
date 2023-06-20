@@ -38,3 +38,28 @@ export const searchCarMake = async (make: string) => {
         console.log(e);
     }
 };
+
+/* Search car from model
+ * @params model {string}
+ * @return newCars <- cars get of api
+ * @return modelCar <- cars get of MongoDB
+ * */
+export const searchCarModel = async (model: string) => {
+    try {
+        const modelCar = await CarModel.find({ model });
+
+        if (!modelCar.length) {
+            const { data } = await clientAxios(`?model=${model}&limit=30`);
+
+            if (!data.length) return { msg: "Modelo no encontrado" };
+
+            const newCars = await CarModel.create(data);
+            console.log(model, newCars);
+            return newCars;
+        }
+
+        return modelCar;
+    } catch (e) {
+        console.log(e);
+    }
+};
