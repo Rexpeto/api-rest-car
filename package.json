@@ -34,7 +34,9 @@
     "scripts": {
         "dev": "nodemon ./src/app.ts",
         "lint": "eslint ./src/**/*.ts",
-        "format": "eslint ./src/**/*.ts --fix"
+        "format": "eslint ./src/**/*.ts --fix",
+        "build": "tsc",
+        "start": "node ./dist/app.js"
     },
     "author": "Carlos Gallardo",
     "repository": {
